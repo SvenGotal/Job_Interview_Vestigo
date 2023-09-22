@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Info>
+	<OneTag>1999/07/04</OneTag>
+	<AnotherTag>123</AnotherTag>
+	<LastTag>Acme Alpha</LastTag>
+	
+	<Thing>
+		<ThingId> 987</ThingId>
+		<ThingName>Coupler</ThingName>
+		<Amount>5</Amount>
+	</Thing>
+	
+	<Thing> 
+		<ThingId>654</ThingId>
+		<ThingName>Connector</ThingName>
+	</Thing>
+	
+	<Thing>   
+		<ThingId>579</ThingId>
+		<ThingName>Clasp</ThingName>
+		<Amount>1</Amount>
+	</Thing>
+	
+<vowelnumber>11</vowelnumber>
+<consonantnumber>19</consonantnumber>	
+	
+</Info>
+
