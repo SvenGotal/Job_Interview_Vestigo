@@ -25,17 +25,9 @@ public class VowelCounter {
 	private String patternStringXML = "<[^>]*>([^<]*)</[^>]*>";
 	
 	// Constructors ///////////////////////////////////////////////////////////////////////
-	
-	
-	/**
-	 * This is the default VowelCounter constructor.
-	 */
-	public VowelCounter() {
-		this.fileName = null; 
-	}
-	
+		
 	/**This is a constructor for VowelCounter class.
-	 * It initializes a new class with the filename parameter.
+	 * It initialises a new class with the filename parameter.
 	 * 
 	 * If filename parameter is not .txt or .xml it will throw FileNotFoundException.
 	 *  
@@ -48,26 +40,13 @@ public class VowelCounter {
 		Boolean fileIsTXT = fileCheckTxt(filename);
 		
 		
-		if(fileCheckTxt(filename) || fileCheckXML(filename)) {
+		if( fileIsXML || fileIsTXT ) {
 			this.fileName = filename;			
 		}
 		else {
 			System.out.println("Input given: " + filename);
 			throw new FileNotFoundException("File must be .txt or .xml");			
-		}
-		
-		Integer[] found = {0,0};
-		
-		if(fileIsXML){
-			found = processXMLFile();
-			this.vowelCounter = found[0];
-			this.consonantCounter = found[1];
-		}
-		else if(fileIsTXT) {
-			found = processTXTFile();
-			this.vowelCounter = found[0];
-			this.consonantCounter = found[1];
-		}
+		}			
 	}
 	
 	
@@ -144,7 +123,7 @@ public class VowelCounter {
 	}
 	
 	/**
-	 * This private method will parse through the given String and count the number of consonants in the given word.
+	 * This private method will parse through the given String and count the number of consonants in that String.
 	 * @param word - String input word that will be processed.
 	 * @return Integer of how many consonants were found.
 	 */
@@ -275,5 +254,25 @@ public class VowelCounter {
 		return this.consonantCounter;
 	}
 	
+	/**
+	 * processFile() will process the given file as an input in the constructor
+	 */
+	public void processFile() {
+		
+		Integer[] found = {0,0};
+		Boolean fileIsXML= fileCheckXML(this.fileName);
+		Boolean fileIsTXT = fileCheckTxt(this.fileName);
+		
+		if(fileIsXML){
+			found = processXMLFile();
+			this.vowelCounter = found[0];
+			this.consonantCounter = found[1];
+		}
+		else if(fileIsTXT) {
+			found = processTXTFile();
+			this.vowelCounter = found[0];
+			this.consonantCounter = found[1];
+		}
+	}
 	
 }
