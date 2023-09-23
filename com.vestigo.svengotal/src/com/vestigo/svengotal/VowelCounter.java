@@ -39,18 +39,15 @@ public class VowelCounter {
 		Boolean fileIsXML= fileCheckXML(filename);
 		Boolean fileIsTXT = fileCheckTxt(filename);
 		
-		
 		if( fileIsXML || fileIsTXT ) {
 			this.fileName = filename;			
 		}
 		else {
-			System.out.println("Input given: " + filename);
-			throw new FileNotFoundException("File must be .txt or .xml");			
+			System.out.println(displayUsage() + displayHelp());
+			throw new FileNotFoundException("Error: File not found or not supported.");			
 		}			
 	}
-	
-	
-	
+			
 	// Private methods ///////////////////////////////////////////////////////////////////////
 	
 	
@@ -183,7 +180,7 @@ public class VowelCounter {
 	}
 	
 	/**
-	 * processXMLFile() uses BufferedReader and FileReader classes to process given .xml file. It will parse through the file line by line and extract values between tags. These words are collected and vowels and consonants are counted.
+	 * processXMLFile() uses BufferedReader and FileReader classes to process given .xml file. It will parse through the file line by line and will count consonants and extract values between tags. These words are collected and vowels are counted.
 	 * @return - gives the Integer array of how many vowels were counted within the given text. Integer[0] is for vowels and Integer[1] is for consonants.
 	 */
 	private Integer[] processXMLFile() {
@@ -200,11 +197,12 @@ public class VowelCounter {
 			Vector<String> words;			
 			
 			while((line = br.readLine()) != null) {
+				
+				count[1] += parseConsonants(line);
 				words = lineParserXML(line);	
 				
 				for(String str : words) {
-					count[0] += parseVowels(str);
-					count[1] += parseConsonants(str);
+					count[0] += parseVowels(str);					
 				}
 				
 			}
@@ -233,7 +231,25 @@ public class VowelCounter {
 		
 		return count;
 	}
+		
+	/**
+	 * displays correct usage of the application
+	 * @return returns the message which can then be printed onto console window or somewhere else.
+	 */
+	private String displayUsage() {		
+		return "Usage: java -jar CountVowelsApp.jar [filename]";			
+	}
 	
+	/**
+	 * displays help info.
+	 * @return returns the help message which can then be displayed wherever that is required. 
+	 */
+	private String displayHelp() {
+		return "\nCountVowelsApp supports only .xml or .txt files. Application counts vowels and consonants in given files"
+				+ " and returns the number of consonants and vowels in .txt files all vowels and consonants are counted but in"
+				+ " .xml files only vowels from the values within tag elements will be counted and for consonants tag elements will be"
+				+ " included.\n";	
+	}
 	
 	// Public methods ///////////////////////////////////////////////////////////////////////
 	
@@ -255,7 +271,7 @@ public class VowelCounter {
 	}
 	
 	/**
-	 * processFile() will process the given file as an input in the constructor
+	 * processFile() will process the input file given in the constructor and count vowels and consonants.
 	 */
 	public void processFile() {
 		
